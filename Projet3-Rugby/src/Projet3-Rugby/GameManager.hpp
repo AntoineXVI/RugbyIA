@@ -31,6 +31,8 @@ public:
 	void setDeltaTime(float deltaTime);
 	float getDeltaTime() const;
 
+	std::vector<Entity*> GetEntities();
+
 	friend Entity;
 };
 

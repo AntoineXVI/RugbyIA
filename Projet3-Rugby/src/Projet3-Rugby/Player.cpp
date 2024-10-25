@@ -5,7 +5,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <iostream>
 
-Player::Player(const sf::Vector2f& position, Behaviour* behaviour) :
+Player::Player(const sf::Vector2f& position, Behaviour* behaviour, Context::Team team) :
     mState(Context::State::Idle)
 {
     mBehaviour = behaviour;
@@ -14,7 +14,12 @@ Player::Player(const sf::Vector2f& position, Behaviour* behaviour) :
 
     sf::CircleShape* shape = new sf::CircleShape(10);
 	shape->setRadius(mSize / 2.f);
-	shape->setFillColor(sf::Color::Green);
+	if (team == Context::Team::Blue) {
+		shape->setFillColor(sf::Color::Blue);
+	}
+	if (team == Context::Team::Red) {
+		shape->setFillColor(sf::Color::Red);
+	}
 	shape->setOrigin(mSize / 2.f, mSize / 2.f);
 	shape->setPosition(position);
 
@@ -27,6 +32,7 @@ Player::~Player()
 
 void Player::Update()
 {
+	mBehaviour->Update(this);
 	Entity::Update();
 }
 
