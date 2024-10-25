@@ -6,8 +6,8 @@ class Move_Action : public Action
 {
 public:
     Move_Action();
-    void Start(Player* Player);
-    void Update(Player* Player);
-    void End(Player* Player);
+    void Start(Player* player) override;
+    void Update(Player* player) override;
+    void End(Player* player) override;
     ~Move_Action();
 };

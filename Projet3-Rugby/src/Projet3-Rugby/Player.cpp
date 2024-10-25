@@ -11,13 +11,13 @@ Player::Player(const sf::Vector2f& position, Behaviour* behaviour, Context::Team
     mBehaviour = behaviour;
 	mSize = 50.f;
 	mSpeed = 30.f;
-
+	mTeam = team;
     sf::CircleShape* shape = new sf::CircleShape(10);
 	shape->setRadius(mSize / 2.f);
-	if (team == Context::Team::Blue) {
+	if (mTeam == Context::Team::Blue) {
 		shape->setFillColor(sf::Color::Blue);
 	}
-	if (team == Context::Team::Red) {
+	if (mTeam == Context::Team::Red) {
 		shape->setFillColor(sf::Color::Red);
 	}
 	shape->setOrigin(mSize / 2.f, mSize / 2.f);
@@ -34,6 +34,11 @@ void Player::Update()
 {
 	mBehaviour->Update(this);
 	Entity::Update();
+}
+
+Context::Team Player::GetTeam() const
+{
+	return mTeam;
 }
 
 Context::State Player::getState() const

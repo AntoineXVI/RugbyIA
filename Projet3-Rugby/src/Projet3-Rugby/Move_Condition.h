@@ -6,6 +6,6 @@ class Move_Condition : public Condition
 {
 public:
     Move_Condition();
-    bool Test(Player* Player);
+    bool Test(Player* player) override;
     ~Move_Condition();
 };

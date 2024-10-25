@@ -6,5 +6,5 @@ class Player;
 class Condition 
 {
 public:
-    virtual bool Test(Player * Player) = 0;
+    virtual bool Test(Player * player) = 0;
 };

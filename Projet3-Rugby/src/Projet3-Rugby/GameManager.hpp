@@ -3,6 +3,7 @@
 #include <vector>
 
 class Entity;
+class Ball;
 
 namespace sf 
 {
@@ -12,6 +13,8 @@ namespace sf
 class GameManager
 {
 	std::vector<Entity*> mEntities;
+	Ball* mBall;
+
 	sf::RenderWindow* mWindow;
 	float mDeltaTime;
 
@@ -32,6 +35,8 @@ public:
 	float getDeltaTime() const;
 
 	std::vector<Entity*> GetEntities();
+	Ball* GetBall();
+
 
 	friend Entity;
 };

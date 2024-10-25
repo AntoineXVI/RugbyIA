@@ -6,7 +6,7 @@ Move_Condition::Move_Condition()
 {
 }
 
-bool Move_Condition::Test(Player* Player)
+bool Move_Condition::Test(Player* player)
 {
 	return true;
 }

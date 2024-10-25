@@ -5,21 +5,21 @@
 #include "GameManager.hpp"
 Move_Action::Move_Action(){}
 
-void Move_Action::Start(Player* Player)
+void Move_Action::Start(Player* player)
 {
 }
 
-void Move_Action::Update(Player* Player)
+void Move_Action::Update(Player* player)
 {
 	//if GetTeam
 	//go to pos Ball mais eviter collision 
 	//faire surface démarquation
 
-	Player->goToPosition(sf::Vector2f(Player->getPosition().x+10.f, Player->getPosition().y));
+	player->goToPosition(sf::Vector2f(player->getPosition().x+10.f, player->getPosition().y));
 
 }
 
-void Move_Action::End(Player* Player)
+void Move_Action::End(Player* player)
 {
 }
 

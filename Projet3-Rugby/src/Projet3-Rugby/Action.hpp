@@ -6,9 +6,9 @@ class Action
 {
 public:
     Action() {};
-    virtual void Start(Player * Player) = 0;
-    virtual void Update(Player * Player) = 0;
-    virtual void End(Player * Player) = 0;
+    virtual void Start(Player * player) = 0;
+    virtual void Update(Player * player) = 0;
+    virtual void End(Player * player) = 0;
     virtual ~Action() {};
 };
 

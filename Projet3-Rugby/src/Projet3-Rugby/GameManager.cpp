@@ -11,6 +11,8 @@
 #include "Transition.hpp"
 #include "Move_Condition.h"
 #include "Move_Action.h"
+#include "GetBall_Condition.h"
+#include "GetBall_Action.h"
 #include <random>
 namespace 
 {
@@ -21,14 +23,24 @@ GameManager::GameManager()
 {
     Behaviour * behaviour = new Behaviour();
 
-	Transition* moveTransition = new Transition();
-	moveTransition->setTargetState(Context::State::Move);
-	moveTransition->addCondition(new Move_Condition());
+	//Transition* moveTransition = new Transition();
+	//moveTransition->setTargetState(Context::State::Move);
+	//moveTransition->addCondition(new Move_Condition());
 
-	Action* moveAction = new Move_Action();
+	//Action* moveAction = new Move_Action();
 
-	behaviour->AddAction(Context::State::Move, moveAction);
+	//behaviour->AddAction(Context::State::Move, moveAction);
 	//behaviour->AddTransition(Context::State::Idle, moveTransition);
+
+
+	Transition* ballTransition = new Transition();
+	ballTransition->setTargetState(Context::State::GetBall);
+	ballTransition->addCondition(new GetBall_Condition());
+
+	Action* ballAction = new GetBall_Action();
+
+	behaviour->AddAction(Context::State::GetBall, ballAction);
+	behaviour->AddTransition(Context::State::Idle, ballTransition);
 
 	// init behaviour here:
 	// example code:
@@ -39,22 +51,22 @@ GameManager::GameManager()
 	//  example_transition->addCondition(new ExampleCondition());
 	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
 
-	Player* p7 = new Player(sf::Vector2f(50, 50), behaviour, Context::Team::Blue);
-    Player* p1 = new Player(sf::Vector2f(100, 150), behaviour, Context::Team::Blue);
+	Player* p1 = new Player(sf::Vector2f(50, 50), behaviour, Context::Team::Blue);
+    Player* p2 = new Player(sf::Vector2f(100, 150), behaviour, Context::Team::Blue);
 	
 	Player* p3 = new Player(sf::Vector2f(200, 360), behaviour, Context::Team::Blue);
 
-	Player* p5 = new Player(sf::Vector2f(100, 570), behaviour, Context::Team::Blue);
-	Player* p8 = new Player(sf::Vector2f(50, 670), behaviour, Context::Team::Blue);
+	Player* p4 = new Player(sf::Vector2f(100, 570), behaviour, Context::Team::Blue);
+	Player* p5 = new Player(sf::Vector2f(50, 670), behaviour, Context::Team::Blue);
     
 
 
-	Player* p9 = new Player(sf::Vector2f(1230, 50), behaviour, Context::Team::Red);
-	Player* p2 = new Player(sf::Vector2f(1180, 100), behaviour, Context::Team::Red);
+	Player* p6 = new Player(sf::Vector2f(1230, 50), behaviour, Context::Team::Red);
+	Player* p7 = new Player(sf::Vector2f(1180, 100), behaviour, Context::Team::Red);
 
-	Player* p4 = new Player(sf::Vector2f(1080, 360), behaviour, Context::Team::Red);
+	Player* p8 = new Player(sf::Vector2f(1080, 360), behaviour, Context::Team::Red);
 
-	Player* p6 = new Player(sf::Vector2f(1180, 620), behaviour, Context::Team::Red);
+	Player* p9 = new Player(sf::Vector2f(1180, 620), behaviour, Context::Team::Red);
 	Player* p10 = new Player(sf::Vector2f(1230, 670), behaviour, Context::Team::Red);
 
 	mEntities.push_back(p1);
@@ -73,13 +85,13 @@ GameManager::GameManager()
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(1, mEntities.size()-1);
+	std::uniform_int_distribution<> dist(0, mEntities.size()-1);
 	int ballchoice = dist(gen);
 	std::cout << ballchoice << std::endl;
 
 
-	Ball* ball = new Ball(sf::Vector2f(mEntities[ballchoice - 1]->getPosition().x, mEntities[ballchoice-1]->getPosition().y));
-	mEntities.push_back(ball);
+	mBall = new Ball(sf::Vector2f(mEntities[ballchoice]->getPosition().x, mEntities[ballchoice]->getPosition().y), (Player*)mEntities[ballchoice]);
+	//mEntities.push_back(ball);
 
 }
 
@@ -117,6 +129,7 @@ void GameManager::Update()
 	{
 		entity->Update();
 	}
+	mBall->Update();
 }
 
 void GameManager::Draw()
@@ -125,6 +138,7 @@ void GameManager::Draw()
 	{
 		mWindow->draw(entity->getShape());
 	}
+	mWindow->draw(mBall->getShape());
 }
 
 void GameManager::setDeltaTime(float deltaTime)
@@ -140,6 +154,11 @@ float GameManager::getDeltaTime() const
 std::vector<Entity*> GameManager::GetEntities()
 {
 	return mEntities;
+}
+
+Ball* GameManager::GetBall()
+{
+	return mBall;
 }
 
 void GameManager::addEntity(Entity* entity)
