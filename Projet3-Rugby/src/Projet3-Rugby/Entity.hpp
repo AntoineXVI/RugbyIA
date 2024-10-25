@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
+#include "Context.hpp"
 
 namespace sf 
 {
@@ -29,4 +30,5 @@ public:
     const sf::Vector2f& getPosition() const;
 
     const sf::Shape& getShape();
+    virtual Context::Team GetTeam()=0;
 };

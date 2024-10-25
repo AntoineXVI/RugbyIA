@@ -16,7 +16,7 @@ public:
 
     void Update() override;
 
-    Context::Team GetTeam() const;
+    Context::Team GetTeam() override;
 
     Context::State getState() const;
     void setState(Context::State);

@@ -15,8 +15,6 @@ bool GetBall_Condition::Test(Player* player)
 	
 }
 
-
-
 GetBall_Condition::~GetBall_Condition()
 {
 }

@@ -36,7 +36,7 @@ void Player::Update()
 	Entity::Update();
 }
 
-Context::Team Player::GetTeam() const
+Context::Team Player::GetTeam() 
 {
 	return mTeam;
 }

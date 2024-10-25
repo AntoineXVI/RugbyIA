@@ -13,6 +13,8 @@
 #include "Move_Action.h"
 #include "GetBall_Condition.h"
 #include "GetBall_Action.h"
+#include "EnemyNear_Condition.h"
+#include "EnemyNear_Action.h"
 #include <random>
 namespace 
 {
@@ -21,8 +23,21 @@ static GameManager* mInstance = nullptr;
 
 GameManager::GameManager()
 {
+	// init behaviour here:
+	// example code:
+	//  Action * action = new ExampleAction();
+	//  behaviour->AddAction(Context::State::ExampleState);
+	//  Transition * example_transition = new Transition();
+	//  example_transition->setTargetState(Context::State::OtherState);
+	//  example_transition->addCondition(new ExampleCondition());
+	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
+
+
+
     Behaviour * behaviour = new Behaviour();
 
+	// MoveAction
+	
 	//Transition* moveTransition = new Transition();
 	//moveTransition->setTargetState(Context::State::Move);
 	//moveTransition->addCondition(new Move_Condition());
@@ -32,6 +47,7 @@ GameManager::GameManager()
 	//behaviour->AddAction(Context::State::Move, moveAction);
 	//behaviour->AddTransition(Context::State::Idle, moveTransition);
 
+	// GetBallAction
 
 	Transition* ballTransition = new Transition();
 	ballTransition->setTargetState(Context::State::GetBall);
@@ -41,15 +57,20 @@ GameManager::GameManager()
 
 	behaviour->AddAction(Context::State::GetBall, ballAction);
 	behaviour->AddTransition(Context::State::Idle, ballTransition);
+	behaviour->AddTransition(Context::State::EnemyNear, ballTransition); 
 
-	// init behaviour here:
-	// example code:
-	//  Action * action = new ExampleAction();
-	//  behaviour->AddAction(Context::State::ExampleState);
-	//  Transition * example_transition = new Transition();
-	//  example_transition->setTargetState(Context::State::OtherState);
-	//  example_transition->addCondition(new ExampleCondition());
-	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
+
+	// EnemyNearAction
+
+	Transition* EnemyNearTransition = new Transition();
+	EnemyNearTransition->setTargetState(Context::State::EnemyNear);
+	EnemyNearTransition->addCondition(new EnemyNear_Condition()); 
+
+	Action* EnemyNearAction = new EnemyNear_Action();
+
+	behaviour->AddAction(Context::State::EnemyNear, EnemyNearAction);
+	behaviour->AddTransition(Context::State::GetBall, EnemyNearTransition);
+
 
 	Player* p1 = new Player(sf::Vector2f(50, 50), behaviour, Context::Team::Blue);
     Player* p2 = new Player(sf::Vector2f(100, 150), behaviour, Context::Team::Blue);

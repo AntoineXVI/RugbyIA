@@ -15,4 +15,5 @@ public:
     ~Ball();
 
     void Update() override;
+    Context::Team GetTeam() override;
 };

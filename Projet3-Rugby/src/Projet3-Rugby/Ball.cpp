@@ -30,3 +30,8 @@ void Ball::Update()
     goToPosition(mAttacker->getPosition());
     Entity::Update();
 }
+
+Context::Team Ball::GetTeam()
+{
+    return Context::Team();
+}
