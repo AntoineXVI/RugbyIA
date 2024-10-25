@@ -13,8 +13,13 @@
 #include "Move_Action.h"
 #include "GetBall_Condition.h"
 #include "GetBall_Action.h"
+
 #include "EnemyNear_Condition.h"
 #include "EnemyNear_Action.h"
+
+#include "Defend_Condition.h"
+#include "Defend_Action.h"
+
 #include <random>
 namespace 
 {
@@ -47,7 +52,11 @@ GameManager::GameManager()
 	//behaviour->AddAction(Context::State::Move, moveAction);
 	//behaviour->AddTransition(Context::State::Idle, moveTransition);
 
+
 	// GetBallAction
+
+
+	//player with the ball
 
 	Transition* ballTransition = new Transition();
 	ballTransition->setTargetState(Context::State::GetBall);
@@ -71,6 +80,26 @@ GameManager::GameManager()
 	behaviour->AddAction(Context::State::EnemyNear, EnemyNearAction);
 	behaviour->AddTransition(Context::State::GetBall, EnemyNearTransition);
 
+
+
+	//defenders
+	Transition* defendTransition = new Transition();
+	defendTransition->setTargetState(Context::State::Defend);
+	defendTransition->addCondition(new Defend_Condition());
+
+	Action* defendAction = new Defend_Action();
+
+	behaviour->AddAction(Context::State::Defend, defendAction);
+	behaviour->AddTransition(Context::State::Idle, defendTransition);//peut etre plus
+
+	// init behaviour here:
+	// example code:
+	//  Action * action = new ExampleAction();
+	//  behaviour->AddAction(Context::State::ExampleState);
+	//  Transition * example_transition = new Transition();
+	//  example_transition->setTargetState(Context::State::OtherState);
+	//  example_transition->addCondition(new ExampleCondition());
+	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
 
 	Player* p1 = new Player(sf::Vector2f(50, 50), behaviour, Context::Team::Blue);
     Player* p2 = new Player(sf::Vector2f(100, 150), behaviour, Context::Team::Blue);
