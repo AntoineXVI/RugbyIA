@@ -10,10 +10,13 @@ Attack_Condition::Attack_Condition()
 
 bool Attack_Condition::Test(Player* player)
 {
-	
-	if (GameManager::Get()->GetBall()->GetAttacker()->GetTeam() == player->GetTeam())
+	Player* attack = GameManager::Get()->GetBall()->GetAttacker();
+	if (attack == nullptr) {
+		return false;
+	}
+	if (attack->GetTeam() == player->GetTeam())
 	{
-		if(GameManager::Get()->GetBall()->GetAttacker()!=player)
+		if(attack !=player)
 		{
 			return true;
 		}

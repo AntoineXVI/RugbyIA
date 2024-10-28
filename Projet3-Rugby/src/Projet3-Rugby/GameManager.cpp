@@ -99,6 +99,7 @@ GameManager::GameManager()
 	behaviour->AddTransition(Context::State::Idle, defendTransition);//peut etre plus
 	behaviour->AddTransition(Context::State::EnemyNear, defendTransition);
 	behaviour->AddTransition(Context::State::GetBall, defendTransition);
+	behaviour->AddTransition(Context::State::Attack, defendTransition);
 
 
 	// attacker
@@ -112,6 +113,7 @@ GameManager::GameManager()
 	behaviour->AddTransition(Context::State::Idle, attackTransition);//peut etre plus
 	behaviour->AddTransition(Context::State::EnemyNear, attackTransition);
 	behaviour->AddTransition(Context::State::GetBall, attackTransition);
+	behaviour->AddTransition(Context::State::Defend, attackTransition);
 
 	// init behaviour here:
 	// example code:
@@ -205,11 +207,7 @@ void GameManager::Update()
 		//collision Joueur X Balle
 		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
 		{
-			if (mEntities[i]->GetTeam() != mBall->GetAttacker()->GetTeam()) //prendre la balle a un adversaire
-			{
-				//changement attaquant
-				mBall->SetAttacker((Player*)mEntities[i]);
-			}
+			mBall->SetAttacker((Player*)mEntities[i]);
 		}
 	}
 }

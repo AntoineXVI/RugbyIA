@@ -10,7 +10,11 @@ Defend_Condition::Defend_Condition()
 
 bool Defend_Condition::Test(Player* player)
 {
-	if(GameManager::Get()->GetBall()->GetAttacker()->GetTeam() != player->GetTeam())
+	Player* attack = GameManager::Get()->GetBall()->GetAttacker();
+	if (attack == nullptr) {
+		return false;
+	}
+	if(attack->GetTeam() != player->GetTeam())
 	{
 		return true;
 	}

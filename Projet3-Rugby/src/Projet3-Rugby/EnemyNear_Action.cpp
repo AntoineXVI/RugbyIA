@@ -47,15 +47,13 @@ void EnemyNear_Action::Update(Player* player)
 		std::uniform_int_distribution<> dist(0, team.size()-1);
 		int ballchoice = dist(gen);
 
-
-
 		if (team[ballchoice]->GetTeam() == player->GetTeam())
 		{
 			//GameManager::Get()->GetBall()->SetAttacker((Player*)team[0]);
-			GameManager::Get()->GetBall()->SetSpeed(300);
+			GameManager::Get()->GetBall()->SetSpeed(120);
 			GameManager::Get()->GetBall()->goToPosition(team[0]->getPosition());
 			team[0]->setDirection(sf::Vector2f{0.f, 0.f});
-			//GameManager::Get()->GetBall()->SetAttacker(nullptr);
+			GameManager::Get()->GetBall()->SetAttacker(nullptr);
 			//GameManager::Get()->GetBall()->goToPosition(GameManager::Get()->GetEntities()[ballchoice]->getPosition());
 			pass = true;
 		}

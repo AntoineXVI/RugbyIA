@@ -41,6 +41,7 @@ void Ball::Update()
         Entity::Update();
         return;
     }
+
     setPosition(mAttacker->getPosition());
 }
 
