@@ -36,9 +36,12 @@ Ball::~Ball()
 
 void Ball::Update()
 {
-    
-    goToPosition(mAttacker->getPosition());
-    Entity::Update();
+    if (!mAttacker)
+    {
+        Entity::Update();
+        return;
+    }
+    setPosition(mAttacker->getPosition());
 }
 
 Context::Team Ball::GetTeam()

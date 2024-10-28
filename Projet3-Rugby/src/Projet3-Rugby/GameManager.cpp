@@ -162,8 +162,6 @@ GameManager::GameManager()
 
 
 	mBall = new Ball(sf::Vector2f(mEntities[ballchoice]->getPosition().x, mEntities[ballchoice]->getPosition().y), (Player*)mEntities[ballchoice]);
-	//mEntities.push_back(ball);
-
 }
 
 GameManager::~GameManager()

@@ -20,19 +20,21 @@ void EnemyNear_Action::Update(Player* player)
 	//player->goToPosition(sf::Vector2f(player->getPosition().x+10, player->getPosition().y+10));
 	//faire une passe
 	bool pass = false;
-	while (!pass) {
+	while (!pass)
+	{
 		std::vector<Entity*> team;
-		for (int i = 0; i < GameManager::Get()->GetEntities().size(); i++) {
+		std::vector<Entity*> entities = GameManager::Get()->GetEntities();
+		for (int i = 0; i < entities.size(); i++) {
 			if (player->GetTeam() == Context::Team::Blue) {
-				if (GameManager::Get()->GetEntities()[i]->getPosition().x <= (player->getPosition().x - 150))
+				if (entities[i]->getPosition().x <= (player->getPosition().x - 150))
 				{
-					team.push_back(GameManager::Get()->GetEntities()[i]);
+					team.push_back(entities[i]);
 				}
 			}
 			if (player->GetTeam() == Context::Team::Red) {
-				if (GameManager::Get()->GetEntities()[i]->getPosition().x >= (player->getPosition().x + 150))
+				if (entities[i]->getPosition().x >= (player->getPosition().x + 150))
 				{
-					team.push_back(GameManager::Get()->GetEntities()[i]);
+					team.push_back(entities[i]);
 				}
 			}
 
@@ -49,8 +51,10 @@ void EnemyNear_Action::Update(Player* player)
 
 		if (team[ballchoice]->GetTeam() == player->GetTeam())
 		{
-			GameManager::Get()->GetBall()->SetAttacker((Player*)team[0]);
+			//GameManager::Get()->GetBall()->SetAttacker((Player*)team[0]);
 			GameManager::Get()->GetBall()->SetSpeed(300);
+			GameManager::Get()->GetBall()->goToPosition(team[0]->getPosition());
+			team[0]->setDirection(sf::Vector2f{0.f, 0.f});
 			//GameManager::Get()->GetBall()->SetAttacker(nullptr);
 			//GameManager::Get()->GetBall()->goToPosition(GameManager::Get()->GetEntities()[ballchoice]->getPosition());
 			pass = true;
