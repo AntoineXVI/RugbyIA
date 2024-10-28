@@ -8,6 +8,7 @@ class Behaviour;
 class Player : public Entity
 {
     Context::State mState;
+    Context::Post mPost;
     Context::Team mTeam;
     Behaviour * mBehaviour;
 public:
@@ -17,6 +18,8 @@ public:
     void Update() override;
 
     Context::Team GetTeam() override;
+
+    Context::Post GetPost();
 
     Context::State getState() const;
     void setState(Context::State);

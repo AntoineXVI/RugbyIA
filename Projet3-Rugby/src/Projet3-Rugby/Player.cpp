@@ -24,6 +24,16 @@ Player::Player(const sf::Vector2f& position, Behaviour* behaviour, Context::Team
 	shape->setPosition(position);
 
     mShape = shape;
+
+	if (position.y < 360) {
+		mPost = Context::Post::Top;
+	}
+	if (position.y == 360) {
+		mPost = Context::Post::Mid;
+	}
+	if (position.y > 360) {
+		mPost = Context::Post::Bot;
+	}
 }
 
 Player::~Player()
@@ -39,6 +49,11 @@ void Player::Update()
 Context::Team Player::GetTeam() 
 {
 	return mTeam;
+}
+
+Context::Post Player::GetPost()
+{
+	return mPost;
 }
 
 Context::State Player::getState() const

@@ -20,6 +20,9 @@
 #include "Defend_Condition.h"
 #include "Defend_Action.h"
 
+#include "Attack_Condition.h"
+#include "Attack_Action.h"
+
 #include <random>
 namespace 
 {
@@ -92,6 +95,17 @@ GameManager::GameManager()
 	behaviour->AddAction(Context::State::Defend, defendAction);
 	behaviour->AddTransition(Context::State::Idle, defendTransition);//peut etre plus
 
+	// attacker
+	Transition* attackTransition = new Transition();
+	attackTransition->setTargetState(Context::State::Attack);
+	attackTransition->addCondition(new Attack_Condition());
+
+	Action* attackAction = new Attack_Action();
+
+	behaviour->AddAction(Context::State::Attack, attackAction);
+	behaviour->AddTransition(Context::State::Idle, attackTransition);//peut etre plus
+
+
 	// init behaviour here:
 	// example code:
 	//  Action * action = new ExampleAction();
@@ -112,11 +126,11 @@ GameManager::GameManager()
 
 
 	Player* p6 = new Player(sf::Vector2f(1230, 50), behaviour, Context::Team::Red);
-	Player* p7 = new Player(sf::Vector2f(1180, 100), behaviour, Context::Team::Red);
+	Player* p7 = new Player(sf::Vector2f(1180, 150), behaviour, Context::Team::Red);
 
 	Player* p8 = new Player(sf::Vector2f(1080, 360), behaviour, Context::Team::Red);
 
-	Player* p9 = new Player(sf::Vector2f(1180, 620), behaviour, Context::Team::Red);
+	Player* p9 = new Player(sf::Vector2f(1180, 570), behaviour, Context::Team::Red);
 	Player* p10 = new Player(sf::Vector2f(1230, 670), behaviour, Context::Team::Red);
 
 	mEntities.push_back(p1);
