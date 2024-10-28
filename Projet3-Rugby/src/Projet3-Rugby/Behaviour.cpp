@@ -52,6 +52,7 @@ void Behaviour::Update(Player * player)
 {
     for (const auto & a : mActions[player->getState()])
     {
+
         a->Update(player);
     }
 

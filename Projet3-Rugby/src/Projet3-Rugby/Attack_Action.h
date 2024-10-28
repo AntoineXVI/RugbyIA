@@ -6,7 +6,7 @@ class Player;
 
 class Attack_Action : public Action
 {
-    std::map<Context::Team, int> mDirection{ {Context::Team::Blue,100},{Context::Team::Red,-100} };
+    std::map<Context::Team, int> mDirection{ {Context::Team::Blue,150},{Context::Team::Red,-150} };
 
 public:
     Attack_Action();

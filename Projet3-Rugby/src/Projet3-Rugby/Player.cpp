@@ -10,7 +10,7 @@ Player::Player(const sf::Vector2f& position, Behaviour* behaviour, Context::Team
 {
     mBehaviour = behaviour;
 	mSize = 50.f;
-	mSpeed = 30.f;
+	mSpeed = 60.f;
 	mTeam = team;
     sf::CircleShape* shape = new sf::CircleShape(10);
 	shape->setRadius(mSize / 2.f);

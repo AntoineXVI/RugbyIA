@@ -70,6 +70,8 @@ GameManager::GameManager()
 	behaviour->AddAction(Context::State::GetBall, ballAction);
 	behaviour->AddTransition(Context::State::Idle, ballTransition);
 	behaviour->AddTransition(Context::State::EnemyNear, ballTransition); 
+	behaviour->AddTransition(Context::State::Defend, ballTransition);
+	behaviour->AddTransition(Context::State::Attack, ballTransition);
 
 
 	// EnemyNearAction
@@ -94,6 +96,9 @@ GameManager::GameManager()
 
 	behaviour->AddAction(Context::State::Defend, defendAction);
 	behaviour->AddTransition(Context::State::Idle, defendTransition);//peut etre plus
+	behaviour->AddTransition(Context::State::EnemyNear, defendTransition);
+	behaviour->AddTransition(Context::State::GetBall, defendTransition);
+
 
 	// attacker
 	Transition* attackTransition = new Transition();
@@ -104,7 +109,8 @@ GameManager::GameManager()
 
 	behaviour->AddAction(Context::State::Attack, attackAction);
 	behaviour->AddTransition(Context::State::Idle, attackTransition);//peut etre plus
-
+	behaviour->AddTransition(Context::State::EnemyNear, attackTransition);
+	behaviour->AddTransition(Context::State::GetBall, attackTransition);
 
 	// init behaviour here:
 	// example code:

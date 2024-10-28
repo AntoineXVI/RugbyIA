@@ -6,7 +6,7 @@ Ball::Ball(const sf::Vector2f& position, Player* player)
 {
     sf::CircleShape* shape = new sf::CircleShape();
     mAttacker = player;
-    mSpeed = 30.f;
+    mSpeed = 60.f;
     mSize = 30.f;
     shape->setRadius(mSize / 2.f);
     shape->setFillColor(sf::Color::Yellow);
@@ -18,6 +18,16 @@ Ball::Ball(const sf::Vector2f& position, Player* player)
 Player* Ball::GetAttacker()
 {
     return mAttacker;
+}
+
+void Ball::SetSpeed(float speed)
+{
+    mSpeed = speed;
+}
+
+void Ball::SetAttacker(Player* player)
+{
+    mAttacker = player;
 }
 
 Ball::~Ball()

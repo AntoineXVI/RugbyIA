@@ -3,6 +3,8 @@
 #include "Player.hpp"
 #include "Ball.hpp"
 #include "GameManager.hpp"
+#include <random>
+#include "Context.hpp"
 
 EnemyNear_Action::EnemyNear_Action()
 {
@@ -17,6 +19,45 @@ void EnemyNear_Action::Update(Player* player)
 {
 	//player->goToPosition(sf::Vector2f(player->getPosition().x+10, player->getPosition().y+10));
 	//faire une passe
+	bool pass = false;
+	while (!pass) {
+		std::vector<Entity*> team;
+		for (int i = 0; i < GameManager::Get()->GetEntities().size(); i++) {
+			if (player->GetTeam() == Context::Team::Blue) {
+				if (GameManager::Get()->GetEntities()[i]->getPosition().x <= (player->getPosition().x - 150))
+				{
+					team.push_back(GameManager::Get()->GetEntities()[i]);
+				}
+			}
+			if (player->GetTeam() == Context::Team::Red) {
+				if (GameManager::Get()->GetEntities()[i]->getPosition().x >= (player->getPosition().x + 150))
+				{
+					team.push_back(GameManager::Get()->GetEntities()[i]);
+				}
+			}
+
+		}
+		if (team.empty()) {
+			return;
+		}
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(0, team.size()-1);
+		int ballchoice = dist(gen);
+
+
+
+		if (team[ballchoice]->GetTeam() == player->GetTeam())
+		{
+			GameManager::Get()->GetBall()->SetAttacker((Player*)team[0]);
+			GameManager::Get()->GetBall()->SetSpeed(300);
+			//GameManager::Get()->GetBall()->SetAttacker(nullptr);
+			//GameManager::Get()->GetBall()->goToPosition(GameManager::Get()->GetEntities()[ballchoice]->getPosition());
+			pass = true;
+		}
+		
+	}
+	
 }
 
 void EnemyNear_Action::End(Player* player)
