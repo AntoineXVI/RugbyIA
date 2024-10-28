@@ -45,3 +45,8 @@ Context::Team Ball::GetTeam()
 {
     return Context::Team();
 }
+
+Context::State Ball::GetState()
+{
+    return Context::State();
+}

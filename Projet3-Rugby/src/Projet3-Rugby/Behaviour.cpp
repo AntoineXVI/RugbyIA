@@ -42,7 +42,7 @@ void Behaviour::AddAction(Context::State key, Action* value)
 
 void Behaviour::Start(Player * player)
 {
-    for (const auto & a : mActions[player->getState()])
+    for (const auto & a : mActions[player->GetState()])
     {
         a->Start(player);
     }
@@ -50,13 +50,13 @@ void Behaviour::Start(Player * player)
 
 void Behaviour::Update(Player * player)
 {
-    for (const auto & a : mActions[player->getState()])
+    for (const auto & a : mActions[player->GetState()])
     {
 
         a->Update(player);
     }
 
-    for (const auto & a : mTransitions[player->getState()])
+    for (const auto & a : mTransitions[player->GetState()])
     {
         a->Try(player);
     }

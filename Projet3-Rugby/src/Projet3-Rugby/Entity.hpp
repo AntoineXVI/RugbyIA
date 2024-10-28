@@ -24,11 +24,14 @@ public:
 
     ~Entity();
     void setDirection(const sf::Vector2f& direction);
+    const sf::Vector2f& getDirection() const;
     void goToPosition(const sf::Vector2f& position);
 
     void setPosition(const sf::Vector2f& position);
     const sf::Vector2f& getPosition() const;
 
     const sf::Shape& getShape();
+    float GetSize();
     virtual Context::Team GetTeam()=0;
+    virtual Context::State GetState()=0;
 };

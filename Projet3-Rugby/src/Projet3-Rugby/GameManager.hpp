@@ -37,7 +37,5 @@ public:
 	std::vector<Entity*> GetEntities();
 	Ball* GetBall();
 
-
 	friend Entity;
 };
-

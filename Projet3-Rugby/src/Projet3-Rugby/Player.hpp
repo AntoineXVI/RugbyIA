@@ -21,6 +21,8 @@ public:
 
     Context::Post GetPost();
 
-    Context::State getState() const;
+    Context::State GetState() override;
+    void Collider();
     void setState(Context::State);
+    bool collidePlayer();
 };

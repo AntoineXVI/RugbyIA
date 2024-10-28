@@ -18,4 +18,5 @@ public:
 
     void Update() override;
     Context::Team GetTeam() override;
+    Context::State GetState() override;
 };

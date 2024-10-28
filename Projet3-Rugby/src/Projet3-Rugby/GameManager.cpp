@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Utils.hpp"
 #include "GameManager.hpp"
 
 #include "Behaviour.hpp"
@@ -200,6 +201,19 @@ void GameManager::Update()
 		entity->Update();
 	}
 	mBall->Update();
+
+	for (int i = 0; i < mEntities.size(); i++)
+	{
+		//collision Joueur X Balle
+		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
+		{
+			if (mEntities[i]->GetTeam() != mBall->GetAttacker()->GetTeam()) //prendre la balle a un adversaire
+			{
+				//changement attaquant
+				mBall->SetAttacker((Player*)mEntities[i]);
+			}
+		}
+	}
 }
 
 void GameManager::Draw()

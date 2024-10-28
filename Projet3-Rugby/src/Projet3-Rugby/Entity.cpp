@@ -39,6 +39,11 @@ void Entity::setDirection(const sf::Vector2f& new_direction)
     mDirection = new_direction;
 }
 
+const sf::Vector2f& Entity::getDirection() const
+{
+    return mDirection;
+}
+
 void Entity::goToPosition(const sf::Vector2f& position)
 {
     setDirection(Utils::Vector2Normalize(position - getPosition()));
@@ -48,3 +53,9 @@ const sf::Shape& Entity::getShape()
 {
     return *mShape;
 }
+
+float Entity::GetSize()
+{
+    return mSize;
+}
+
