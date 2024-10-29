@@ -164,7 +164,7 @@ void Player::setState(Context::State new_state)
 void Player::Timer()
 {
 	invicibility = true;
-	mFullTime = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::system_clock::now().time_since_epoch() + std::chrono::seconds(3)).count();
+	mFullTime = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::system_clock::now().time_since_epoch() + std::chrono::seconds(2)).count();
 }
 
 bool Player::isInvicible()

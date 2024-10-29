@@ -199,6 +199,16 @@ void GameManager::Update()
 
 void GameManager::Draw()
 {
+	sf::RectangleShape goalBlue(sf::Vector2f(1280 / 10, 720));
+	goalBlue.setFillColor(sf::Color::Cyan);
+	goalBlue.setPosition(sf::Vector2f(0, 0));
+	mWindow->draw(goalBlue);
+
+	sf::RectangleShape goalRed(sf::Vector2f(1280 / 10, 720));
+	goalRed.setFillColor(sf::Color::Cyan);
+	goalRed.setPosition(sf::Vector2f(1280-1280 / 10, 0));
+	mWindow->draw(goalRed);
+
 	if (!font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf"))
 	{
 		std::cout << "error font\n";

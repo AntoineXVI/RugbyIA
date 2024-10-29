@@ -75,9 +75,9 @@ int main(void)
         window.clear();
         window.clear(sf::Color(51, 153, 102));
 
+        
         game_manager->Update();
         game_manager->Draw();
-
         window.display();
 
         game_manager->setDeltaTime(dt.asSeconds());
