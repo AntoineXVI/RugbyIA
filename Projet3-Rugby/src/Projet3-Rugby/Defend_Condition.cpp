@@ -14,6 +14,7 @@ bool Defend_Condition::Test(Player* player)
 	if (attack == nullptr) {
 		return false;
 	}
+
 	if(attack->GetTeam() != player->GetTeam())
 	{
 		return true;

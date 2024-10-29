@@ -66,6 +66,26 @@ Context::State Player::GetState()
     return mState;
 }
 
+std::string Player::GetStateStr()
+{
+	switch (mState) {
+	case Context::State::Attack:
+		return "Attack";
+	case Context::State::Defend:
+		return "Defend";
+	case Context::State::GetBall:
+		return "GetBall";
+	case Context::State::EnemyNear:
+		return "EnemyNear";
+	case Context::State::Idle:
+		return "Idle";
+	case Context::State::Move:
+		return "Move";
+	}
+	
+
+}
+
 void  Player::Collider()
 {
 	float dt = GameManager::Get()->getDeltaTime();
@@ -76,14 +96,14 @@ void  Player::Collider()
 		if (players[i] != this) {
 			if (Utils::isCollide(this, players[i]))
 			{
-				if (players[i]->GetState() == Context::State::GetBall) //si players[i] a la balle
+				if (players[i]->GetState() == Context::State::GetBall || players[i]->GetState() == Context::State::EnemyNear) //si players[i] a la balle
 				{
 					GameManager::Get()->GetBall()->SetAttacker(this);
 				}
-				else if (this->GetState() == Context::State::GetBall) //si this a la balle
-				{
-					GameManager::Get()->GetBall()->SetAttacker((Player*)players[i]);
-				}
+				//else if (this->GetState() == Context::State::GetBall) //si this a la balle
+				//{
+				//	GameManager::Get()->GetBall()->SetAttacker((Player*)players[i]);
+				//}
 
 				int DirX;
 				int DirY;
@@ -114,32 +134,4 @@ void  Player::Collider()
 void Player::setState(Context::State new_state) 
 {
     mState = new_state;
-}
-
-bool Player::collidePlayer()
-{
-	sf::FloatRect bounds = mShape->getGlobalBounds();
-
-	std::vector<Entity*> players = GameManager::Get()->GetEntities();
-
-	for (int i = 0; i < players.size(); i++)
-	{
-		if (players[i] != this /* && this->GetTeam() != players[i]->GetTeam()*/)
-		{
-			auto playerBounds = players[i]->getShape().getLocalBounds();
-			if (bounds.intersects(playerBounds))
-			{
-				if (this->mTeam == Context::Team::Blue)
-				{
-					this->setPosition(sf::Vector2f(getPosition().x - 1, getPosition().y));
-				}
-				else
-				{
-					this->setPosition(sf::Vector2f(getPosition().x + 1, getPosition().y));
-				}
-				std::cout << "hit\n";
-			}
-		}
-	}
-	return false;
 }

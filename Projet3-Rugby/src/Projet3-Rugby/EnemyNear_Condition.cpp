@@ -11,6 +11,7 @@ EnemyNear_Condition::EnemyNear_Condition()
 
 bool EnemyNear_Condition::Test(Player* player)
 {
+
 	auto players= GameManager::Get()->GetEntities();
 
 	for (int i = 0; i < players.size(); i++)

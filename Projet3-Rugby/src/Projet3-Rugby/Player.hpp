@@ -22,6 +22,7 @@ public:
     Context::Post GetPost();
 
     Context::State GetState() override;
+    std::string GetStateStr() override;
     void Collider();
     void setState(Context::State);
     bool collidePlayer();

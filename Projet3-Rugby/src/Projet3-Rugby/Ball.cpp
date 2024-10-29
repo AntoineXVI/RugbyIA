@@ -41,6 +41,11 @@ void Ball::Update()
         Entity::Update();
         return;
     }
+    else
+    {
+        mSpeed = 0;
+        mDirection = sf::Vector2f(0,0);
+    }
 
     setPosition(mAttacker->getPosition());
 }
@@ -53,4 +58,9 @@ Context::Team Ball::GetTeam()
 Context::State Ball::GetState()
 {
     return Context::State();
+}
+
+std::string Ball::GetStateStr()
+{
+    return std::string();
 }

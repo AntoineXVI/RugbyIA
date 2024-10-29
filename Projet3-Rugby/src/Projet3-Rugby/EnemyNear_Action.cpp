@@ -19,6 +19,7 @@ void EnemyNear_Action::Update(Player* player)
 {
 	//player->goToPosition(sf::Vector2f(player->getPosition().x+10, player->getPosition().y+10));
 	//faire une passe
+	player->setDirection(sf::Vector2f{ 0.f, 0.f });
 	bool pass = false;
 	while (!pass)
 	{

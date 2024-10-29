@@ -14,42 +14,40 @@ void Defend_Action::Start(Player* player)
 
 void Defend_Action::Update(Player* player)
 {
-	
-	Player* attack = GameManager::Get()->GetBall()->GetAttacker();
-	if (attack == nullptr) {
-		return ;
-	}
+	sf::Vector2f ballPos = GameManager::Get()->GetBall()->getPosition();
+
+
 	if (player->GetPost() == Context::Post::Top) {
 
-		if (attack->getPosition().y > 360)//moitié du terrain
+		if (ballPos.y > 360)//moitié du terrain
 		{
-			player->goToPosition(sf::Vector2f(GameManager::Get()->GetBall()->getPosition().x,360));
+			player->goToPosition(sf::Vector2f(ballPos.x,360));
 			return;
 		}
 	}
 
 	if (player->GetPost() == Context::Post::Mid) {
-		if (attack->getPosition().y < 720/4)//1er quart du terrain
+		if (ballPos.y < 720/4)//1er quart du terrain
 		{
-			player->goToPosition(sf::Vector2f(GameManager::Get()->GetBall()->getPosition().x, 720 / 4));
+			player->goToPosition(sf::Vector2f(ballPos.x, 720 / 4));
 			return;
 		}
-		if (attack->getPosition().y > 3*(720 / 4))//4e quart du terrain
+		if (ballPos.y > 3*(720 / 4))//4e quart du terrain
 		{
-			player->goToPosition(sf::Vector2f(GameManager::Get()->GetBall()->getPosition().x, 3*(720 / 4)));
+			player->goToPosition(sf::Vector2f(ballPos.x, 3*(720 / 4)));
 			return;
 		}
 	}
 
 	if (player->GetPost() == Context::Post::Bot) {
-		if (attack->getPosition().y < 360)//moitié du terrain
+		if (ballPos.y < 360)//moitié du terrain
 		{
-			player->goToPosition(sf::Vector2f(GameManager::Get()->GetBall()->getPosition().x, 360));
+			player->goToPosition(sf::Vector2f(ballPos.x, 360));
 			return;
 		}
 	}
 
-	player->goToPosition(GameManager::Get()->GetBall()->getPosition());
+	player->goToPosition(ballPos);
 
 	//pour eviter l'aglutination (ça pue)
 	//auto team = GameManager::Get()->GetEntities();

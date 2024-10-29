@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <SFML/Graphics.hpp>
 #include "Utils.hpp"
 #include "GameManager.hpp"
 
@@ -190,9 +191,10 @@ void GameManager::Update()
 	for (int i = 0; i < mEntities.size(); i++)
 	{
 		//collision Joueur X Balle
-		if (Utils::isCollide(mEntities[i], mBall) )//&& mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
+		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
 		{
 			mBall->SetAttacker((Player*)mEntities[i]);
+			mBall->setPosition(mEntities[i]->getPosition());
 		}
 	}
 }
@@ -202,6 +204,12 @@ void GameManager::Draw()
 	for (Entity* entity : mEntities)
 	{
 		mWindow->draw(entity->getShape());
+		sf::Font font;
+		font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf");
+		sf::Text text(entity->GetStateStr(), font);
+		text.setCharacterSize(30);
+		text.setPosition(entity->getPosition());
+		mWindow->draw(text);
 	}
 	mWindow->draw(mBall->getShape());
 }

@@ -1,5 +1,6 @@
 #pragma once
-
+#include <iostream>
+#include <string>
 #include <SFML/System/Vector2.hpp>
 #include "Context.hpp"
 
@@ -34,4 +35,5 @@ public:
     float GetSize();
     virtual Context::Team GetTeam()=0;
     virtual Context::State GetState()=0;
+    virtual std::string GetStateStr() = 0;
 };
