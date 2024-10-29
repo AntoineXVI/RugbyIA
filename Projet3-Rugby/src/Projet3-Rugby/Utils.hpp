@@ -7,4 +7,5 @@ namespace Utils
 	sf::Vector2f Vector2Normalize(const sf::Vector2f& vector);
 	float GetDeltaTime();
 	bool isCollide(Entity* objI, Entity* objII);
+	bool isCollideCircle(Entity* objI, Entity* objII);
 }
