@@ -41,21 +41,21 @@ int main(void)
             }
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) //clic gauche 
             {
-                std::cout << "letf clic\n";
+                std::cout << "left clic\n";
                 sf::Vector2f localPositionL = sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
                 if (!isSelectedL) //teleport player
                 {
                     playerClicked = Utils::isPlayerClicked(localPositionL, entities);
                     if (playerClicked != -1)
                     {
-                        entities[playerClicked]->setColor(sf::Color::Green);
+                        //entities[playerClicked]->setColor(sf::Color::Green);
                         isSelectedL = true;
                     }
                 }
                 else
                 {
                     entities[playerClicked]->setPosition(sf::Vector2f(localPositionL.x,localPositionL.y));
-                    entities[playerClicked]->setColor(sf::Color::Red);
+                    //entities[playerClicked]->setColor(sf::Color::Red);
                     isSelectedL = false;
                 }
             }

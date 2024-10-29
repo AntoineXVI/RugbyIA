@@ -76,7 +76,6 @@ namespace Utils
                 if (mousePosition.y > (int)playerPos.y && mousePosition.y < (int)playerPos.y + entities[i]->GetSize())
                 {
                     std::cout << "player " << i << " clicked\n";
-                    entities[i]->setColor(sf::Color::Green);
                     return i;
                 }
             }

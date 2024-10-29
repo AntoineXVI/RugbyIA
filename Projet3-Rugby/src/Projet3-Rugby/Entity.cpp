@@ -14,11 +14,6 @@ Entity::~Entity()
 { 
 }
 
-void Entity::setColor(sf::Color color)
-{
-    mShape->setFillColor(color);
-}
-
 void Entity::Update()
 {
     float dt = GameManager::Get()->getDeltaTime();
