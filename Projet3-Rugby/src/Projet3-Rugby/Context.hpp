@@ -8,8 +8,7 @@ namespace Context
         Defend,
         Attack,
         GetBall,
-        EnemyNear,
-        Move
+        EnemyNear
     };
     enum class Team
     {

@@ -46,4 +46,23 @@ namespace Utils
 
         return false;
     }
+
+    bool isCollideCircle(Entity* objI, Entity* objII)
+    {
+        if (objII == nullptr) {
+            return false;
+        }
+
+        sf::Vector2f posI = objI->getPosition();
+        sf::Vector2f posII = objII->getPosition();
+        float radiusI = objI->GetSize() / 2;
+        float radiusII = objII->GetSize() / 2;
+
+        float dx = posI.x - posII.x;
+        float dy = posI.y - posII.y;
+        float distanceSquared = dx * dx + dy * dy;
+
+        float radiusSum = radiusI + radiusII;
+        return distanceSquared <= (radiusSum * radiusSum);
+    }
 }

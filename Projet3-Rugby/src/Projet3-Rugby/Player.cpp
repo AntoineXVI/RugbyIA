@@ -103,11 +103,7 @@ std::string Player::GetStateStr()
 		return "EnemyNear";
 	case Context::State::Idle:
 		return "Idle";
-	case Context::State::Move:
-		return "Move";
 	}
-	
-
 }
 
 void  Player::Collider()
@@ -120,7 +116,7 @@ void  Player::Collider()
 	{
 		if (players[i] != this) {
 				
-			if (Utils::isCollide(this, players[i]))
+			if (Utils::isCollideCircle(this, players[i]))
 			{
 				if (players[i]->GetState() == Context::State::GetBall || players[i]->GetState() == Context::State::EnemyNear) //si players[i] a la balle
 				{
