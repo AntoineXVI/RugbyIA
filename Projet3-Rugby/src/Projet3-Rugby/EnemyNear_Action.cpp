@@ -52,14 +52,15 @@ void EnemyNear_Action::Update(Player* player)
 		{
 			//GameManager::Get()->GetBall()->SetAttacker((Player*)team[0]);
 			GameManager::Get()->GetBall()->SetSpeed(120);
-			GameManager::Get()->GetBall()->goToPosition(team[0]->getPosition());
-			team[0]->setDirection(sf::Vector2f{0.f, 0.f});
+			GameManager::Get()->GetBall()->goToPosition(team[ballchoice]->getPosition());
+			team[ballchoice]->setDirection(sf::Vector2f{0.f, 0.f});
 			GameManager::Get()->GetBall()->SetAttacker(nullptr);
 			//GameManager::Get()->GetBall()->goToPosition(GameManager::Get()->GetEntities()[ballchoice]->getPosition());
 			pass = true;
+			player->setState(Context::State::Idle);
 		}
 	}
-	player->setState(Context::State::Idle);
+	
 	
 }
 

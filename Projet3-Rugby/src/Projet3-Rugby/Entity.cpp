@@ -50,7 +50,7 @@ void Entity::goToPosition(const sf::Vector2f& position)
     setDirection(Utils::Vector2Normalize(position - getPosition()));
 }
 
-const sf::Shape& Entity::getShape()
+sf::Shape& Entity::getShape()
 {
     return *mShape;
 }

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Context.hpp"
 #include <vector>
 
 class Entity;
@@ -38,7 +38,7 @@ public:
 	std::vector<Entity*> GetEntities();
 	Ball* GetBall();
 	void Win();
-	void Restart();
+	void Restart(Context::Team winner);
 
 	friend Entity;
 };

@@ -16,7 +16,7 @@ void Defend_Action::Update(Player* player)
 {
 	sf::Vector2f ballPos = GameManager::Get()->GetBall()->getPosition();
 
-
+	player->getShape().setOutlineThickness(0);
 	if (player->GetPost() == Context::Post::Top) {
 
 		if (ballPos.y > 360)//moitié du terrain

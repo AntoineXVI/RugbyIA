@@ -255,27 +255,48 @@ void GameManager::Win()
 	if (attacker->GetTeam() == Context::Team::Blue) {
 		if (attacker->getPosition().x > 1280 - 1280 / 10) {
 			ScoreB++;
-			Restart();
+			Restart(Context::Team::Blue);
 		}
 	}
 	if (attacker->GetTeam() == Context::Team::Red) {
 		if (attacker->getPosition().x < 1280 / 10) {
 			ScoreR++;
-			Restart();
+			Restart(Context::Team::Red);
 		}
 	}
 
 }
 
-void GameManager::Restart()
+void GameManager::Restart(Context::Team winner)
 {
-	//int yBlue = 360;
-	//int xBlue = 200;
-	//for (Entity* entity : mEntities)
-	//{
-	//	entity
-	//}
+	int yBlue = 360;
+	int xBlue = 200;
+	mEntities[0]->setPosition(sf::Vector2f(50, 50));
+	mEntities[1]->setPosition(sf::Vector2f(100, 150));
+	mEntities[2]->setPosition(sf::Vector2f(200, 360));
+	mEntities[3]->setPosition(sf::Vector2f(100, 570));
+	mEntities[4]->setPosition(sf::Vector2f(50, 670));
 
+	mEntities[5]->setPosition(sf::Vector2f(1230, 50));
+	mEntities[6]->setPosition(sf::Vector2f(1180, 150));
+	mEntities[7]->setPosition(sf::Vector2f(1080, 360));
+	mEntities[8]->setPosition(sf::Vector2f(1180, 570));
+	mEntities[9]->setPosition(sf::Vector2f(1230, 670));
+
+
+	bool ballchange = false;
+	while(!ballchange)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(0, mEntities.size() - 1);
+		int ballchoice = dist(gen);
+		std::cout << ballchoice << std::endl;
+		if (mEntities[ballchoice]->GetTeam() != winner) {
+			mBall->SetAttacker((Player*)mEntities[ballchoice]);
+			ballchange = true;
+		}
+	}
 }
 
 void GameManager::addEntity(Entity* entity)
