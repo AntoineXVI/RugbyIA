@@ -14,6 +14,11 @@ Entity::~Entity()
 { 
 }
 
+void Entity::setColor(sf::Color color)
+{
+    mShape->setFillColor(color);
+}
+
 void Entity::Update()
 {
     float dt = GameManager::Get()->getDeltaTime();
@@ -23,6 +28,7 @@ void Entity::Update()
     newPosition.y += dt * mSpeed * mDirection.y;
     mShape->move(newPosition);
 }
+
 
 void Entity::setPosition(const sf::Vector2f& position)
 {

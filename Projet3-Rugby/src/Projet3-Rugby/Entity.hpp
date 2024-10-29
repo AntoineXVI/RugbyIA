@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics.hpp>
 #include "Context.hpp"
 
 namespace sf 
@@ -25,6 +26,7 @@ public:
     virtual void Update();
 
     ~Entity();
+    void setColor(sf::Color color);
     void setDirection(const sf::Vector2f& direction);
     const sf::Vector2f& getDirection() const;
     void goToPosition(const sf::Vector2f& position);

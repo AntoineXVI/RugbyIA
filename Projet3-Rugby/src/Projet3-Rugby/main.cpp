@@ -1,8 +1,11 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "pch.h"
 #include "GameManager.hpp"
+#include "Utils.hpp"
+#include "Entity.hpp"
+#include "Player.hpp"
 
 int main(void)
 {
@@ -19,8 +22,11 @@ int main(void)
 	GameManager * game_manager = GameManager::Instantiate();
     game_manager->setWindow(&window);
     game_manager->setDeltaTime(0.f);
+    auto entities = game_manager->GetEntities();
 
     sf::Clock clock;
+    bool isSelectedL = false; //bool Left
+    int playerClicked = -1;
     while (window.isOpen())
     {
         sf::Time dt = clock.restart();
@@ -32,6 +38,37 @@ int main(void)
                 event.key.code == sf::Keyboard::Escape))
             {
                 window.close();
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) //clic gauche 
+            {
+                std::cout << "letf clic\n";
+                sf::Vector2f localPositionL = sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+                if (!isSelectedL) //teleport player
+                {
+                    playerClicked = Utils::isPlayerClicked(localPositionL, entities);
+                    if (playerClicked != -1)
+                    {
+                        entities[playerClicked]->setColor(sf::Color::Green);
+                        isSelectedL = true;
+                    }
+                }
+                else
+                {
+                    entities[playerClicked]->setPosition(sf::Vector2f(localPositionL.x,localPositionL.y));
+                    entities[playerClicked]->setColor(sf::Color::Red);
+                    isSelectedL = false;
+                }
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) //clic droit 
+            {
+                std::cout << "right clic\n";
+                sf::Vector2f localPositionR = sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+                
+                playerClicked = Utils::isPlayerClicked(localPositionR, entities);
+                if (playerClicked != -1)
+                {
+                    dynamic_cast <Player*>(entities[playerClicked])->setState(Context::State::EnemyNear);
+                }
             }
         }
 
