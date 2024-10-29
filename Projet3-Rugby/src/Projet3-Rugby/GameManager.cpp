@@ -191,7 +191,7 @@ void GameManager::Update()
 	for (int i = 0; i < mEntities.size(); i++)
 	{
 		//collision Joueur X Balle
-		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
+		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear && !mEntities[i]->isInvicible())
 		{
 			mBall->SetAttacker((Player*)mEntities[i]);
 			mBall->setPosition(mEntities[i]->getPosition());

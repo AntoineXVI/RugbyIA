@@ -21,6 +21,7 @@ protected:
     Entity();
 
 public:
+    virtual void Start() = 0;
     virtual void Update();
 
     ~Entity();
@@ -36,4 +37,5 @@ public:
     virtual Context::Team GetTeam()=0;
     virtual Context::State GetState()=0;
     virtual std::string GetStateStr() = 0;
+    virtual bool isInvicible() = 0;
 };

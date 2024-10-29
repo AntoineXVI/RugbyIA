@@ -4,6 +4,7 @@
 #include "Ball.hpp"
 #include "GameManager.hpp"
 
+
 GetBall_Action::GetBall_Action()
 {
 
@@ -11,6 +12,7 @@ GetBall_Action::GetBall_Action()
 
 void GetBall_Action::Start(Player* player)
 {
+	player->Timer();
 }
 
 void GetBall_Action::Update(Player* player)

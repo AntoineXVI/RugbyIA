@@ -11,6 +11,9 @@ EnemyNear_Condition::EnemyNear_Condition()
 
 bool EnemyNear_Condition::Test(Player* player)
 {
+	if (player->isInvicible()) {
+		return false;
+	}
 
 	auto players= GameManager::Get()->GetEntities();
 

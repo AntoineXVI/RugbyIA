@@ -16,8 +16,10 @@ public:
     void SetAttacker(Player* player);
     ~Ball();
 
+    void Start() override;
     void Update() override;
     Context::Team GetTeam() override;
     Context::State GetState() override;
     std::string GetStateStr() override;
+    bool isInvicible() override;
 };

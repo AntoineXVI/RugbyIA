@@ -22,5 +22,6 @@ void Transition::Try(Player * Player)
     if (true_tests != 0 && true_tests == mConditions.size())
     {
         Player->setState(mTargetState);
+        Player->Start();
     }
 }

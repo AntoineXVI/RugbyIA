@@ -34,6 +34,10 @@ Ball::~Ball()
 {
 }
 
+void Ball::Start()
+{
+}
+
 void Ball::Update()
 {
     if (!mAttacker)
@@ -63,4 +67,9 @@ Context::State Ball::GetState()
 std::string Ball::GetStateStr()
 {
     return std::string();
+}
+
+bool Ball::isInvicible()
+{
+    return false;
 }

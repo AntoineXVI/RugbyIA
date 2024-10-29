@@ -11,10 +11,14 @@ class Player : public Entity
     Context::Post mPost;
     Context::Team mTeam;
     Behaviour * mBehaviour;
+
+    double mFullTime;
+    bool invicibility;
 public:
     Player(const sf::Vector2f& position, Behaviour* behaviour, Context::Team team);
     ~Player();
 
+    void Start() override;
     void Update() override;
 
     Context::Team GetTeam() override;
@@ -25,5 +29,6 @@ public:
     std::string GetStateStr() override;
     void Collider();
     void setState(Context::State);
-    bool collidePlayer();
+    void Timer();
+    bool isInvicible() override;
 };

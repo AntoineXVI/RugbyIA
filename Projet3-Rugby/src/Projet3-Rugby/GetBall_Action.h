@@ -4,6 +4,7 @@ class Player;
 
 class GetBall_Action : public Action
 {
+    double mFullTime;
 public:
     GetBall_Action();
     void Start(Player* player) override;
