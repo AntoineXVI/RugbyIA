@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics.hpp>
 #include "Context.hpp"
 
 namespace sf 

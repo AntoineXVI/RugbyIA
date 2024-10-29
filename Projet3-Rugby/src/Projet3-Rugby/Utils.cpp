@@ -65,4 +65,21 @@ namespace Utils
         float radiusSum = radiusI + radiusII;
         return distanceSquared <= (radiusSum * radiusSum);
     }
+
+    int isPlayerClicked(sf::Vector2f mousePosition, std::vector<Entity*> entities)
+    {
+        for (int i = 0; i < entities.size(); i++)
+        {
+            auto playerPos = entities[i]->getPosition();
+            if (mousePosition.x > (int)playerPos.x && mousePosition.x < (int)playerPos.x + entities[i]->GetSize())
+            {
+                if (mousePosition.y > (int)playerPos.y && mousePosition.y < (int)playerPos.y + entities[i]->GetSize())
+                {
+                    std::cout << "player " << i << " clicked\n";
+                    return i;
+                }
+            }
+        }
+        return -1; //not player on click
+    }
 }

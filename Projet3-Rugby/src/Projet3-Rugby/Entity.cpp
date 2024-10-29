@@ -24,6 +24,7 @@ void Entity::Update()
     mShape->move(newPosition);
 }
 
+
 void Entity::setPosition(const sf::Vector2f& position)
 {
     mShape->setPosition(position);
