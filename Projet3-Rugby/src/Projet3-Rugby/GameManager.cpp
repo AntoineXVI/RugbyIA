@@ -111,14 +111,15 @@ GameManager::GameManager()
 	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
 
 	Player* p1 = new Player(sf::Vector2f(50, 50), behaviour, Context::Team::Blue);
+	auto result = p1->getShape().getFillColor();
     Player* p2 = new Player(sf::Vector2f(100, 150), behaviour, Context::Team::Blue);
-	
+	auto result2 = p2->getShape().getFillColor();
+	 
 	Player* p3 = new Player(sf::Vector2f(200, 360), behaviour, Context::Team::Blue);
 
 	Player* p4 = new Player(sf::Vector2f(100, 570), behaviour, Context::Team::Blue);
 	Player* p5 = new Player(sf::Vector2f(50, 670), behaviour, Context::Team::Blue);
     
-
 
 	Player* p6 = new Player(sf::Vector2f(1230, 50), behaviour, Context::Team::Red);
 	Player* p7 = new Player(sf::Vector2f(1180, 150), behaviour, Context::Team::Red);
@@ -139,15 +140,11 @@ GameManager::GameManager()
 	mEntities.push_back(p9);
 	mEntities.push_back(p10);
 
-
-
-
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(0, mEntities.size()-1);
 	int ballchoice = dist(gen);
 	std::cout << ballchoice << std::endl;
-
 
 	mBall = new Ball(sf::Vector2f(mEntities[ballchoice]->getPosition().x, mEntities[ballchoice]->getPosition().y), (Player*)mEntities[ballchoice]);
 }
@@ -202,19 +199,21 @@ void GameManager::Update()
 
 void GameManager::Draw()
 {
-	sf::Font font;
-	font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf");
-	for (Entity* entity : mEntities)
+	if (!font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf"))
 	{
+		std::cout << "error font\n";
+		return;
+	}
+	for (Entity* entity : mEntities)
+	{		
 		mWindow->draw(entity->getShape());
-		
+
 		sf::Text text(entity->GetStateStr(), font);
 		text.setCharacterSize(30);
 		text.setPosition(entity->getPosition());
 		mWindow->draw(text);
 	}
 	mWindow->draw(mBall->getShape());
-
 
 	sf::Text textB(std::to_string(ScoreB), font);
 	textB.setCharacterSize(30);

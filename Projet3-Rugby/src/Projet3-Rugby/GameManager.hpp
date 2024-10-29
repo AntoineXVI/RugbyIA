@@ -19,6 +19,7 @@ class GameManager
 	float mDeltaTime;
 	int ScoreR =0, ScoreB =0;
 
+	sf::Font font;
 	GameManager();
 
 	void addEntity(Entity* entity);
