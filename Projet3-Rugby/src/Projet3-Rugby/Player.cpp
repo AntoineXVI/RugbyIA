@@ -112,53 +112,52 @@ std::string Player::GetStateStr()
 
 void  Player::Collider()
 {
-	if (!invicibility) {
-		float dt = GameManager::Get()->getDeltaTime();
-		sf::Vector2f newPosition;
-		auto players = GameManager::Get()->GetEntities();
-		for (int i = 0; i < players.size() - 1; i++)
-		{
-			if (players[i] != this) {
+	
+	float dt = GameManager::Get()->getDeltaTime();
+	sf::Vector2f newPosition;
+	auto players = GameManager::Get()->GetEntities();
+	for (int i = 0; i < players.size() - 1; i++)
+	{
+		if (players[i] != this) {
 				
-					if (Utils::isCollide(this, players[i]))
-					{
-						if (players[i]->GetState() == Context::State::GetBall || players[i]->GetState() == Context::State::EnemyNear) //si players[i] a la balle
-						{
-							if (!players[i]->isInvicible()) {
-								GameManager::Get()->GetBall()->SetAttacker(this);
-							}
-						}
-						//else if (this->GetState() == Context::State::GetBall) //si this a la balle
-						//{
-						//	GameManager::Get()->GetBall()->SetAttacker((Player*)players[i]);
-						//}
-
-						int DirX;
-						int DirY;
-						if (players[i]->getPosition().x - this->getPosition().x > 0)
-						{
-							DirX = 1;
-						}
-						else
-						{
-							DirX = -1;
-						}
-						if (players[i]->getPosition().y - this->getPosition().y > 0)
-						{
-							DirY = 1;
-						}
-						else
-						{
-							DirY = -1;
-						}
-						newPosition.x -= dt * mSpeed * DirX;
-						newPosition.y -= dt * mSpeed * DirY;
+			if (Utils::isCollide(this, players[i]))
+			{
+				if (players[i]->GetState() == Context::State::GetBall || players[i]->GetState() == Context::State::EnemyNear) //si players[i] a la balle
+				{
+					if (!invicibility && !players[i]->isInvicible()) {
+						GameManager::Get()->GetBall()->SetAttacker(this);
 					}
-				
+				}
+				//else if (this->GetState() == Context::State::GetBall) //si this a la balle
+				//{
+				//	GameManager::Get()->GetBall()->SetAttacker((Player*)players[i]);
+				//}
+
+				int DirX;
+				int DirY;
+				if (players[i]->getPosition().x - this->getPosition().x > 0)
+				{
+					DirX = 1;
+				}
+				else
+				{
+					DirX = -1;
+				}
+				if (players[i]->getPosition().y - this->getPosition().y > 0)
+				{
+					DirY = 1;
+				}
+				else
+				{
+					DirY = -1;
+				}
+				newPosition.x -= dt * mSpeed * DirX;
+				newPosition.y -= dt * mSpeed * DirY;
 			}
 		}
-		mShape->move(newPosition);
 	}
+	mShape->move(newPosition);
+	
 }
 
 void Player::setState(Context::State new_state) 

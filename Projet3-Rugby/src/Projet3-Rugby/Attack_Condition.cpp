@@ -14,7 +14,7 @@ bool Attack_Condition::Test(Player* player)
 	if (attack == nullptr) {
 		return false;
 	}
-	if (attack->GetTeam() == player->GetTeam() )
+	if (attack->GetTeam() == player->GetTeam())
 	{
 		if(attack !=player)
 		{

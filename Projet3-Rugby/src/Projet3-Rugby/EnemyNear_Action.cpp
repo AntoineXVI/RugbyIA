@@ -58,8 +58,8 @@ void EnemyNear_Action::Update(Player* player)
 			//GameManager::Get()->GetBall()->goToPosition(GameManager::Get()->GetEntities()[ballchoice]->getPosition());
 			pass = true;
 		}
-		
 	}
+	player->setState(Context::State::Idle);
 	
 }
 

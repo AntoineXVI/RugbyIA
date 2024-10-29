@@ -4,6 +4,7 @@
 #include "GameManager.hpp"
 #include <iostream>
 #include "Context.hpp"
+#include "Ball.hpp"
 
 EnemyNear_Condition::EnemyNear_Condition()
 {
@@ -14,6 +15,10 @@ bool EnemyNear_Condition::Test(Player* player)
 	if (player->isInvicible()) {
 		return false;
 	}
+	/*if (GameManager::Get()->GetBall()->GetAttacker() != player) 
+	{
+		return false;
+	}*/
 
 	auto players= GameManager::Get()->GetEntities();
 
