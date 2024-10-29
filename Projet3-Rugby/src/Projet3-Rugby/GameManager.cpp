@@ -41,24 +41,9 @@ GameManager::GameManager()
 	//  example_transition->addCondition(new ExampleCondition());
 	//  behaviour->AddTransition(Context::State::ExampleState, example_transition);
 
-
-
     Behaviour * behaviour = new Behaviour();
 
-	// MoveAction
-	
-	//Transition* moveTransition = new Transition();
-	//moveTransition->setTargetState(Context::State::Move);
-	//moveTransition->addCondition(new Move_Condition());
-
-	//Action* moveAction = new Move_Action();
-
-	//behaviour->AddAction(Context::State::Move, moveAction);
-	//behaviour->AddTransition(Context::State::Idle, moveTransition);
-
-
 	// GetBallAction
-
 
 	//player with the ball
 
@@ -87,8 +72,8 @@ GameManager::GameManager()
 	behaviour->AddTransition(Context::State::GetBall, EnemyNearTransition);
 
 
-
 	//defenders
+
 	Transition* defendTransition = new Transition();
 	defendTransition->setTargetState(Context::State::Defend);
 	defendTransition->addCondition(new Defend_Condition());
@@ -205,7 +190,7 @@ void GameManager::Update()
 	for (int i = 0; i < mEntities.size(); i++)
 	{
 		//collision Joueur X Balle
-		if (Utils::isCollide(mEntities[i], mBall) && mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
+		if (Utils::isCollide(mEntities[i], mBall) )//&& mEntities[i]->GetState() != Context::State::GetBall && mEntities[i]->GetState() != Context::State::EnemyNear)
 		{
 			mBall->SetAttacker((Player*)mEntities[i]);
 		}
