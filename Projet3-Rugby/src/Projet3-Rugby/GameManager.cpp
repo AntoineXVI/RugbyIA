@@ -197,21 +197,33 @@ void GameManager::Update()
 			mBall->setPosition(mEntities[i]->getPosition());
 		}
 	}
+	Win();
 }
 
 void GameManager::Draw()
 {
+	sf::Font font;
+	font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf");
 	for (Entity* entity : mEntities)
 	{
 		mWindow->draw(entity->getShape());
-		sf::Font font;
-		font.loadFromFile("../../../src/Projet3-Rugby/Hack-Regular.ttf");
+		
 		sf::Text text(entity->GetStateStr(), font);
 		text.setCharacterSize(30);
 		text.setPosition(entity->getPosition());
 		mWindow->draw(text);
 	}
 	mWindow->draw(mBall->getShape());
+
+
+	sf::Text textB(std::to_string(ScoreB), font);
+	textB.setCharacterSize(30);
+	textB.setPosition(50,50);
+	mWindow->draw(textB);
+	sf::Text textR(std::to_string(ScoreR), font);
+	textR.setCharacterSize(30);
+	textR.setPosition(1230, 50);
+	mWindow->draw(textR);
 }
 
 void GameManager::setDeltaTime(float deltaTime)
@@ -232,6 +244,38 @@ std::vector<Entity*> GameManager::GetEntities()
 Ball* GameManager::GetBall()
 {
 	return mBall;
+}
+
+void GameManager::Win()
+{
+	auto attacker = mBall->GetAttacker();
+	if (!attacker) {
+		return;
+	}
+	if (attacker->GetTeam() == Context::Team::Blue) {
+		if (attacker->getPosition().x > 1280 - 1280 / 10) {
+			ScoreB++;
+			Restart();
+		}
+	}
+	if (attacker->GetTeam() == Context::Team::Red) {
+		if (attacker->getPosition().x < 1280 / 10) {
+			ScoreR++;
+			Restart();
+		}
+	}
+
+}
+
+void GameManager::Restart()
+{
+	//int yBlue = 360;
+	//int xBlue = 200;
+	//for (Entity* entity : mEntities)
+	//{
+	//	entity
+	//}
+
 }
 
 void GameManager::addEntity(Entity* entity)

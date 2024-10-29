@@ -17,6 +17,7 @@ class GameManager
 
 	sf::RenderWindow* mWindow;
 	float mDeltaTime;
+	int ScoreR =0, ScoreB =0;
 
 	GameManager();
 
@@ -36,6 +37,8 @@ public:
 
 	std::vector<Entity*> GetEntities();
 	Ball* GetBall();
+	void Win();
+	void Restart();
 
 	friend Entity;
 };
